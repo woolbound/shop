@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woolbound — Crafted by Hand, Bound by Magic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #1a1510;
+    --stone: #2a2420;
+    --stone-light: #3a3028;
+    --ember: #c8622a;
+    --gold: #d4a843;
+    --gold-bright: #f0c060;
+    --cream: #f0e6d0;
+    --mist: #9a8878;
+    --moss: #4a6741;
+    --crack: #d4a843;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%23d4a843' opacity='0.8'/%3E%3C/svg%3E") 10 10, auto;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  /* Stone texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(212,168,67,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(212,168,67,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Gold crack veins running through the page */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(33deg, transparent 15%, rgba(212,168,67,0.006) 15.1%, rgba(212,168,67,0.006) 15.2%, transparent 15.3%),
+      linear-gradient(210deg, transparent 88%, rgba(212,168,67,0.006) 88.1%, rgba(212,168,67,0.006) 88.2%, transparent 88.3%),
+      linear-gradient(320deg, transparent 42%, rgba(212,168,67,0.005) 42.1%, rgba(212,168,67,0.005) 42.2%, transparent 42.3%),
+      linear-gradient(110deg, transparent 75%, rgba(212,168,67,0.005) 75.1%, rgba(212,168,67,0.005) 75.2%, transparent 75.3%),
+      linear-gradient(245deg, transparent 33%, rgba(212,168,67,0.004) 33.1%, rgba(212,168,67,0.004) 33.15%, transparent 33.2%),
+      linear-gradient(67deg, transparent 58%, rgba(212,168,67,0.004) 58.1%, rgba(212,168,67,0.004) 58.15%, transparent 58.2%),
+      linear-gradient(143deg, transparent 40%, rgba(212,168,67,0.012) 40.2%, rgba(212,168,67,0.012) 40.4%, transparent 40.6%),
+      linear-gradient(22deg, transparent 68%, rgba(212,168,67,0.012) 68.2%, rgba(212,168,67,0.012) 68.35%, transparent 68.5%),
+      linear-gradient(288deg, transparent 25%, rgba(212,168,67,0.01) 25.2%, rgba(212,168,67,0.01) 25.35%, transparent 25.5%),
+      linear-gradient(170deg, transparent 80%, rgba(212,168,67,0.01) 80.2%, rgba(212,168,67,0.01) 80.35%, transparent 80.5%),
+      linear-gradient(95deg, transparent 50%, rgba(212,168,67,0.01) 50.2%, rgba(212,168,67,0.01) 50.35%, transparent 50.5%),
+      linear-gradient(78deg, transparent 30%, rgba(212,168,67,0.035) 30.3%, rgba(212,168,67,0.055) 30.7%, rgba(212,168,67,0.035) 31.1%, transparent 31.5%),
+      linear-gradient(195deg, transparent 45%, rgba(212,168,67,0.03) 45.3%, rgba(212,168,67,0.05) 45.65%, rgba(212,168,67,0.03) 46%, transparent 46.3%),
+      linear-gradient(340deg, transparent 62%, rgba(212,168,67,0.035) 62.3%, rgba(212,168,67,0.055) 62.65%, rgba(212,168,67,0.035) 63%, transparent 63.3%),
+      linear-gradient(55deg, transparent 72%, rgba(212,168,67,0.03) 72.3%, rgba(212,168,67,0.05) 72.65%, rgba(212,168,67,0.03) 73%, transparent 73.3%),
+      linear-gradient(260deg, transparent 18%, rgba(212,168,67,0.035) 18.3%, rgba(212,168,67,0.055) 18.65%, rgba(212,168,67,0.035) 19%, transparent 19.3%),
+      linear-gradient(127deg, transparent 19.5%, rgba(212,168,67,0.04) 20%, rgba(212,168,67,0.18) 21%, rgba(240,192,96,0.25) 21.5%, rgba(212,168,67,0.18) 22%, rgba(212,168,67,0.04) 22.5%, transparent 23%),
+      linear-gradient(230deg, transparent 34%, rgba(212,168,67,0.04) 34.5%, rgba(212,168,67,0.16) 35.5%, rgba(240,192,96,0.22) 36%, rgba(212,168,67,0.16) 36.5%, rgba(212,168,67,0.04) 37%, transparent 37.5%),
+      linear-gradient(15deg, transparent 54%, rgba(212,168,67,0.04) 54.5%, rgba(212,168,67,0.18) 55.5%, rgba(240,192,96,0.24) 56%, rgba(212,168,67,0.18) 56.5%, rgba(212,168,67,0.04) 57%, transparent 57.5%),
+      linear-gradient(310deg, transparent 9.5%, rgba(212,168,67,0.04) 10%, rgba(212,168,67,0.16) 11%, rgba(240,192,96,0.2) 11.5%, rgba(212,168,67,0.16) 12%, rgba(212,168,67,0.04) 12.5%, transparent 13%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .rune {
+    position: fixed;
+    font-size: 2rem;
+    color: var(--gold);
+    opacity: 0.08;
+    animation: runeGlow var(--d) ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+    text-shadow: 0 0 10px rgba(212,168,67,0.3);
+    filter: blur(0.5px);
+  }
+  @keyframes runeGlow {
+    from { opacity: 0.06; text-shadow: 0 0 5px rgba(212,168,67,0.2); }
+    to { opacity: 0.18; text-shadow: 0 0 20px rgba(212,168,67,0.6); }
+  }
+
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .star {
+    position: absolute;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+    box-shadow: 0 0 4px rgba(212,168,67,0.8);
+  }
+  @keyframes twinkle {
+    from { opacity: 0.05; transform: scale(0.8); }
+    to { opacity: 0.6; transform: scale(1.3); }
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .sigil {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+    animation: rotateSigil 20s linear infinite;
+    filter: drop-shadow(0 0 15px rgba(212,168,67,0.5)) drop-shadow(0 0 40px rgba(212,168,67,0.2));
+  }
+  @keyframes rotateSigil {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(212,168,67,0.8), 0 0 60px rgba(212,168,67,0.3), 2px 2px 0px rgba(0,0,0,0.8);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--mist);
+    margin-top: 1rem;
+    letter-spacing: 0.15em;
+    animation: fadeUp 1.2s 0.3s ease both;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    animation: fadeUp 1.2s 0.5s ease both;
+  }
+  .hero-divider span { color: var(--gold); font-size: 1.2rem; text-shadow: 0 0 10px rgba(212,168,67,0.8); }
+  .hero-divider::before, .hero-divider::after {
+    content: '';
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold));
+    box-shadow: 0 0 4px rgba(212,168,67,0.5);
+  }
+  .hero-divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
+
+  .hero-desc {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    opacity: 0.8;
+    max-width: 500px;
+    line-height: 1.8;
+    animation: fadeUp 1.2s 0.7s ease both;
+  }
+
+  .hero-btn {
+    margin-top: 2.5rem;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    background: rgba(212,168,67,0.05);
+    color: var(--gold);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    animation: fadeUp 1.2s 0.9s ease both;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(212,168,67,0.1), inset 0 0 15px rgba(212,168,67,0.05);
+  }
+  .hero-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+  .hero-btn:hover { color: var(--deep); box-shadow: 0 0 30px rgba(212,168,67,0.4); }
+  .hero-btn:hover::before { transform: translateX(0); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--mist);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    animation: bounce 2s ease-in-out infinite;
+    font-family: 'Lora', serif;
+    font-style: italic;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(212,168,67,0.5), 2px 2px 0 rgba(0,0,0,0.8);
+  }
+
+  .section-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--mist);
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    opacity: 0.6;
+    font-size: 1.5rem;
+    margin: 1rem 0 3rem;
+    letter-spacing: 0.5em;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    border: 1px solid rgba(212,168,67,0.25);
+    background: linear-gradient(135deg, rgba(42,36,32,0.95) 0%, rgba(30,26,22,0.98) 100%);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.4s;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.3), 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,168,67,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at top left, rgba(212,168,67,0.06), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .product-card:hover {
+    border-color: rgba(212,168,67,0.7);
+    transform: translateY(-4px);
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.3), 0 8px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212,168,67,0.15);
+  }
+  .product-card:hover::before { opacity: 1; }
+
+  .product-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.7;
+  }
+  .product-corner.tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+  .product-corner.tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+  .product-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+  .product-corner.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+  .product-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .product-lore {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--mist);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .product-desc {
+    font-size: 1.05rem;
+    color: var(--cream);
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-price {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--ember);
+  }
+
+  .product-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--moss);
+    color: #7ab870;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    font-family: 'Lora', serif;
+    margin-left: 0.5rem;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(20,16,12,0.95), transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(212,168,67,0.1);
+  }
+
+  .nav-brand {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .glow-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(212,168,67,0.15), rgba(212,168,67,0.4), rgba(212,168,67,0.15), transparent);
+    margin: 0 auto;
+  }
+
+  footer {
+    border-top: 1px solid rgba(212,168,67,0.15);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--mist);
+    opacity: 0.8;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1rem;
+    background: linear-gradient(to top, rgba(10,8,6,0.8), transparent);
+  }
+
+  .contact-box {
+    border: 1px solid rgba(212,168,67,0.25);
+    background: linear-gradient(135deg, rgba(42,36,32,0.95), rgba(26,21,16,0.98));
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,168,67,0.05);
+  }
+
+  .contact-box input, .contact-box textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(212,168,67,0.2);
+    color: var(--cream);
+    padding: 0.8rem 1rem;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+  }
+
+  .coming-soon {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(200,98,42,0.08);
+    border: 1px solid rgba(200,98,42,0.3);
+    color: var(--ember);
+    font-family: 'Lora', serif;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    body { font-size: 16px; }
+    nav { padding: 0.8rem 1rem; }
+    .hero { padding: 5rem 1.2rem 2rem; }
+    .hero-title { font-size: clamp(2.2rem, 12vw, 3.5rem); }
+    section { padding: 3rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-brand">Woolbound</a>
+  <ul class="nav-links">
+    <li><a href="#wares">Wares</a></li>
+    <li><a href="#lore">Our Story</a></li>
+    <li><a href="#summon">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <svg class="sigil" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="55" stroke="#d4a843" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="60" cy="60" r="45" stroke="#d4a843" stroke-width="0.5" opacity="0.3"/>
+      <polygon points="60,10 110,90 10,90" stroke="#d4a843" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <polygon points="60,110 10,30 110,30" stroke="#d4a843" stroke-width="0.8" fill="none" opacity="0.5"/>
+      <circle cx="60" cy="60" r="6" fill="#d4a843" opacity="0.6"/>
+      <circle cx="60" cy="60" r="3" fill="#d4a843"/>
+    </svg>
+
+    <h1 class="hero-title">Woolbound</h1>
+    <p class="hero-sub">Crafted by Hand &nbsp;·&nbsp; Bound by Magic</p>
+    <div class="hero-divider"><span>✦</span></div>
+    <p class="hero-desc">Welcome</p>
+    <a href="#wares" class="hero-btn">Browse the items</a>
+    <div class="scroll-hint">scroll onward ↓</div>
+  </div>
+
+  <!-- Products -->
+  <section id="wares">
+    <h2 class="section-title">The items</h2>
+    <p class="section-sub">each piece finger-knitted by hand</p>
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <div class="coming-soon">⚠ to buy go to quad at lunch and break</div>
+
+    <div class="products-grid">
+
+      <!-- Enchanted Band -->
+      <div class="product-card" onclick="openProduct('band')" style="cursor:pointer;">
+        <div class="product-corner tl"></div>
+        <div class="product-corner tr"></div>
+        <div class="product-corner bl"></div>
+        <div class="product-corner br"></div>
+        <img src="https://i.postimg.cc/nh9NkXDZ/IMG_20260312_142431517_MFNR.jpg" alt="Enchanted Band" style="width:100%;border-radius:2px;margin-bottom:1rem;object-fit:cover;height:200px;border:2px solid rgba(212,168,67,0.7);">
+        <div class="product-name">Enchanted Band</div>
+        <div class="product-lore">"A small magic, worn on the wrist"</div>
+        <div class="product-desc">A handmade finger-knitted bracelet. Small, quick to make and full of charm.</div>
+        <div class="product-price">£3.50 <span class="product-badge" style="border-color:#4a6741;color:#7ab870;">In Stock</span></div>
+      </div>
+
+      <!-- Traveller's Pouch card -->
+      <div class="product-card no-fade" onclick="openProduct('pouch')" style="cursor:pointer;">
+        <div class="product-corner tl"></div>
+        <div class="product-corner tr"></div>
+        <div class="product-corner bl"></div>
+        <div class="product-corner br"></div>
+        <div id="pouchSlideshow" style="width:100%;height:200px;margin-bottom:1rem;position:relative;overflow:hidden;border:2px solid rgba(212,168,67,0.7);">
+          <img id="slideImg" src="https://i.postimg.cc/sfKR8qCf/pencul-case.jpg" alt="Traveller's Pouches" style="width:100%;height:100%;object-fit:cover;transition:opacity 0.8s ease;">
+        </div>
+        <div class="product-name">Traveller's Pouch</div>
+        <div class="product-lore">"Every adventurer needs somewhere to keep their treasures"</div>
+        <div class="product-desc">Handmade chunky finger-knitted pouches in three sizes. Click to explore all styles.</div>
+        <div class="product-price" style="display:flex;align-items:center;justify-content:space-between;">
+          <span>From £6</span>
+          <span style="font-size:0.85rem;color:var(--mist);opacity:0.8;">browse styles →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="glow-line"></div>
+
+  <!-- Care & Refund Policy -->
+  <div style="max-width:600px;margin:2.5rem auto;border:1px solid rgba(212,168,67,0.2);padding:1.5rem;background:rgba(0,0,0,0.2);">
+    <div style="font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:0.85rem;margin-bottom:1rem;text-align:center;">⚠ Care & Shipping Policy</div>
+    <div style="font-family:'Lora',serif;font-style:italic;color:var(--cream);opacity:0.8;font-size:0.95rem;line-height:1.8;">
+      All Woolbound items are handmade and should be handled with care.<br><br>
+      <strong>Do not get these items wet</strong> — water permanently damages the wool texture.<br><br>
+      <strong>Shipping & Delivery:</strong> Once dispatched, we receive a <em>Proof of Postage</em> receipt.<br><br>
+      <strong>Refunds:</strong> Only available for items with a genuine manufacturing fault.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="contact-box">
+      <h3 style="color:var(--gold); font-family:'Cinzel Decorative';">Consult the Spirits</h3>
+      <input type="text" id="magicInput" placeholder="Type: Wet, Size, or Stock">
+      <br>
+      <button class="hero-btn" onclick="(function(){
+          const i = document.getElementById('magicInput');
+          const r = document.getElementById('magicResponse');
+          const val = i.value.toLowerCase();
+          let a = 'i dont know what you are saying';
+          if (val.includes('wet')) a = 'KEEP DRY: Water ruins the magic!';
+          if (val.includes('size')) a = 'Stretchy magic fits all!';
+          if (val.includes('stock')) a = 'Crafting in progress!';
+          r.innerText = a;
+          i.value = '';
+      })()">Cast Summons</button>
+      <p id="magicResponse" style="margin-top: 20px; color: var(--gold); font-style: italic;"></p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Product Page Overlay -->
+<div id="productOverlay" onclick="closeProduct()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:999;opacity:0;pointer-events:none;transition:opacity 0.3s;"></div>
+
+<div id="productPage" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.3s;overflow-y:auto;background:#110e0a;">
+  
+  <div style="position:sticky;top:0;z-index:10;background:#110e0a;padding:1rem 2rem;border-bottom:1px solid rgba(212,168,67,0.2);display:flex;justify-content:space-between;align-items:center;">
+    <button onclick="closeProduct()" style="background:rgba(212,168,67,0.2);border:1px solid rgba(212,168,67,0.8);color:var(--gold);cursor:pointer;padding:0.6rem 1.4rem;font-family:'Cinzel Decorative',serif;font-size:0.8rem;letter-spacing:0.1em;">✕ Close Menu</button>
+    <div style="font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:0.8rem;opacity:0.6;">Woolbound</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:3rem;padding:3rem 4rem;max-width:1100px;margin:0 auto;align-items:flex-start;">
+    <div style="flex:1;min-width:280px;max-width:480px;">
+      <img id="productImg" src="" alt="" style="width:100%;border-radius:2px;border:2px solid rgba(212,168,67,0.7);">
+    </div>
+    <div style="flex:1;min-width:260px;">
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-family:'Lora',serif;font-size:0.8rem;color:var(--mist);margin-bottom:0.6rem;">— choose style —</div>
+        <div id="typeButtons" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;"></div>
+        <div style="font-family:'Lora',serif;font-size:0.8rem;color:var(--mist);margin-bottom:0.6rem;">— available colours —</div>
+        <div id="colourButtons" style="display:flex;flex-wrap:wrap;gap:0.5rem;"></div>
+      </div>
+      <div id="productName" style="font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:1.6rem;margin-bottom:0.5rem;"></div>
+      <div id="productLore" style="font-family:'Lora',serif;font-style:italic;color:var(--mist);font-size:1rem;margin-bottom:1.2rem;"></div>
+      <div id="productDesc" style="font-family:'Lora',serif;color:var(--cream);opacity:0.8;line-height:1.8;margin-bottom:1.5rem;font-size:0.95rem;"></div>
+      <div id="productPrice" style="font-family:'Cinzel Decorative',serif;color:var(--ember);font-size:1.4rem;margin-bottom:2rem;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PRODUCTS = {
+  band: {
+    name: "Enchanted Band",
+    lore: "“A small magic, worn on the wrist”",
+    desc: "A handmade finger-knitted bracelet. Small, quick to make and full of charm.",
+    price: "£3.50",
+    types: [
+      {
+        label: "Enchanted Band",
+        price: "£3.50",
+        colours: [
+          { label: "Red/White/Green", img: "https://i.postimg.cc/nh9NkXDZ/IMG_20260312_142431517_MFNR.jpg" },
+          { label: "Green/Blue/White", img: "https://i.postimg.cc/dVZgBhyJ/IMG_20260312_142423132_MFNR.jpg" },
+        ]
+      }
+    ]
+  },
+  pouch: {
+    name: "Traveller’s Pouch",
+    lore: "“Every adventurer needs somewhere to keep their treasures”",
+    desc: "Handmade chunky finger-knitted pouches in three sizes: trinket, phone, and pencil.",
+    price: "From £6",
+    types: [
+      {
+        label: "Coin Sack",
+        price: "£6",
+        colours: [{ label: "Red/White/Green", img: "https://i.postimg.cc/tRd35Wfr/coin-sack.jpg" }]
+      },
+      {
+        label: "Phone Pouch",
+        price: "£9",
+        colours: [{ label: "Red/White/Green", img: "https://i.postimg.cc/1XQN2GJs/phone-pouch.jpg" }]
+      },
+      {
+        label: "Pencil Pouch",
+        price: "£8",
+        colours: [{ label: "Red/White/Green", img: "https://i.postimg.cc/sfKR8qCf/pencul-case.jpg" }]
+      },
+    ]
+  }
+};
+
+function buildColourButtons(colours) {
+  const btnContainer = document.getElementById('colourButtons');
+  btnContainer.innerHTML = '';
+  colours.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = c.label;
+    btn.style.cssText = `background:${i===0?'rgba(212,168,67,0.25)':'rgba(212,168,67,0.08)'};border:1px solid rgba(212,168,67,${i===0?'0.8':'0.3'});color:var(--gold);padding:0.4rem 0.9rem;font-family:'Lora',serif;font-size:0.8rem;cursor:pointer;`;
+    btn.onclick = () => {
+      document.getElementById('productImg').src = c.img;
+      btnContainer.querySelectorAll('button').forEach(b => {
+        b.style.background = 'rgba(212,168,67,0.08)';
+        b.style.borderColor = 'rgba(212,168,67,0.3)';
+      });
+      btn.style.background = 'rgba(212,168,67,0.25)';
+      btn.style.borderColor = 'rgba(212,168,67,0.8)';
+    };
+    btnContainer.appendChild(btn);
+  });
+  if (colours.length > 0) {
+    document.getElementById('productImg').src = colours[0].img;
+  }
+}
+
+function openProduct(id) {
+  const p = PRODUCTS[id];
+  if (!p) return;
+
+  document.getElementById('productName').textContent = p.name;
+  document.getElementById('productLore').textContent = p.lore;
+  document.getElementById('productDesc').textContent = p.desc;
+  document.getElementById('productPrice').textContent = p.price;
+
+  const typeContainer = document.getElementById('typeButtons');
+  typeContainer.innerHTML = '';
+
+  if (p.types) {
+    p.types.forEach((t, i) => {
+      const btn = document.createElement('button');
+      btn.textContent = t.label;
+      btn.style.cssText = `background:${i===0?'rgba(212,168,67,0.25)':'rgba(212,168,67,0.08)'};border:1px solid rgba(212,168,67,${i===0?'0.8':'0.3'});color:var(--gold);padding:0.4rem 0.9rem;font-family:'Cinzel Decorative',serif;font-size:0.7rem;cursor:pointer;`;
+      btn.onclick = () => {
+        typeContainer.querySelectorAll('button').forEach(b => {
+          b.style.background = 'rgba(212,168,67,0.08)';
+          b.style.borderColor = 'rgba(212,168,67,0.3)';
+        });
+        btn.style.background = 'rgba(212,168,67,0.25)';
+        btn.style.borderColor = 'rgba(212,168,67,0.8)';
+        document.getElementById('productPrice').textContent = t.price;
+        buildColourButtons(t.colours);
+      };
+      typeContainer.appendChild(btn);
+    });
+    buildColourButtons(p.types[0].colours);
+    document.getElementById('productPrice').textContent = p.types[0].price;
+  }
+
+  document.getElementById('productOverlay').style.opacity = '1';
+  document.getElementById('productOverlay').style.pointerEvents = 'auto';
+  document.getElementById('productPage').style.opacity = '1';
+  document.getElementById('productPage').style.pointerEvents = 'auto';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProduct() {
+  document.getElementById('productOverlay').style.opacity = '0';
+  document.getElementById('productOverlay').style.pointerEvents = 'none';
+  document.getElementById('productPage').style.opacity = '0';
+  document.getElementById('productPage').style.pointerEvents = 'none';
+  document.body.style.overflow = '';
+}
+
+// Close when pressing the Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeProduct();
+});
+</script>
+</body>
+</html>
